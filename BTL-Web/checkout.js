@@ -57,31 +57,9 @@ const checkoutPage = () => {
           <button class="remove-item" data-id="${product.id}">Remove</button>
         </div>
       `;
-
       listCartHTML.appendChild(itemDiv);
     });
-
     totalPriceHTML.innerText = '$' + calculateTotal().toFixed(2);
-  };
-
-  // Thay đổi số lượng sản phẩm
-  const changeQuantity = (productId, delta) => {
-    const index = cart.findIndex(item => item.product_id === productId);
-    if (index < 0) return;
-
-    cart[index].quantity += delta;
-    if (cart[index].quantity <= 0) {
-      cart.splice(index, 1); // Xóa sản phẩm nếu số lượng <= 0
-    }
-    saveCart();
-    renderCart();
-  };
-
-  // Xóa sản phẩm khỏi giỏ
-  const removeItem = (productId) => {
-    cart = cart.filter(item => item.product_id !== productId);
-    saveCart();
-    renderCart();
   };
 
   // Lắng nghe sự kiện click trên listCartHTML
@@ -89,7 +67,6 @@ const checkoutPage = () => {
     const target = e.target;
     const id = parseInt(target.dataset.id);
     if (!id) return;
-
     if (target.classList.contains('increase')) {
       changeQuantity(id, 1);
     }
