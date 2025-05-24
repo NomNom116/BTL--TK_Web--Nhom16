@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .login-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ddd;
+    }
+    .login-container h1 {
+      margin-bottom: 20px;
+    }
+    .login-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .login-container input {
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .login-container button {
+      padding: 10px;
+      background-color: #2F2F2F;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .login-container p {
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="loginForm">
+      <input type="email" placeholder="Email" id="loginEmail" required />
+      <input type="password" placeholder="Password" id="loginPassword" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="register.html">Register here</a></p>
+    <p><a href="forgot.html">Forgot password?</a></p>
+  </div>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
