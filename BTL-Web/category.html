@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shop - FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="temporaryContent">
+    <div class="title">Shop All Products</div>
+
+    <div class="filter-bar" style="margin: 20px 0;">
+      <input type="text" id="searchInput" placeholder="Search by name..." />
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="under200">Under $200</option>
+        <option value="200to250">$200 - $250</option>
+        <option value="above250">Above $250</option>
+      </select>
+    </div>
+
+    <div class="listProduct"></div>
+  </div>
+
+  <script type="module" src="category.js"></script>
+</body>
+</html>

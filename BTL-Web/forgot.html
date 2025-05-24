@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password - FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .forgot-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ddd;
+    }
+    .forgot-container h1 {
+      margin-bottom: 20px;
+    }
+    .forgot-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .forgot-container input, button {
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .forgot-container button {
+      background-color: #2F2F2F;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="forgot-container">
+    <h1>Reset Password</h1>
+    <form id="forgotForm">
+      <input type="email" id="forgotEmail" placeholder="Your registered email" required />
+      <input type="password" id="newPassword" placeholder="New password" required />
+      <button type="submit">Reset Password</button>
+    </form>
+    <p><a href="login.html">Back to Login</a></p>
+  </div>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

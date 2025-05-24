@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register - FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .register-container {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 30px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ddd;
+    }
+    .register-container h1 {
+      margin-bottom: 20px;
+    }
+    .register-container form {
+      display: flex;
+      flex-direction: column;
+    }
+    .register-container input {
+      margin-bottom: 15px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .register-container button {
+      padding: 10px;
+      background-color: #2F2F2F;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+    .register-container p {
+      margin-top: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h1>Create Account</h1>
+    <form id="registerForm">
+      <input type="text" placeholder="Full Name" id="fullname" required />
+      <input type="email" placeholder="Email" id="email" required />
+      <input type="password" placeholder="Password" id="password" required />
+      <input type="password" placeholder="Confirm Password" id="confirmPassword" required />
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Login here</a></p>
+  </div>
+
+  <script type="module" src="auth.js"></script>
+</body>
+</html>
