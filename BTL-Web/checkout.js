@@ -1,92 +1,73 @@
-import products from './products.js';
+import products from "./products.js";
 
-const checkoutPage = () => {
-  const listCartHTML = document.querySelector('.listCart');
-  const totalPriceHTML = document.querySelector('.totalPrice');
-  
-  let cart = [];
+const cartList = document.querySelector(".listCart");
+const totalPriceElem = document.querySelector(".totalPrice");
+const checkoutBtn = document.querySelector(".btn-checkout");
+const orderDetails = document.querySelector(".order-details");
+const popup = document.getElementById("popup");
 
-  // Lấy giỏ hàng từ localStorage
-  const loadCart = () => {
-    const storedCart = localStorage.getItem('cart');
-    cart = storedCart ? JSON.parse(storedCart) : [];
-  };
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Lưu giỏ hàng vào localStorage
-  const saveCart = () => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  };
+function renderCart() {
+  cartList.innerHTML = "";
+  let total = 0;
 
-  // Tính tổng tiền
-  const calculateTotal = () => {
-    return cart.reduce((sum, item) => {
-      const product = products.find(p => p.id === item.product_id);
-      if (!product) return sum;
-      return sum + product.price * item.quantity;
-    }, 0);
-  };
+  if (cart.length === 0) {
+    cartList.innerHTML = `
+      <p>Giỏ hàng trống.</p>
+      <a href="index.html" class="back-home">← Quay lại trang chủ</a>
+    `;
+    totalPriceElem.textContent = "$0";
+    checkoutBtn.disabled = true;
+    return;
+  }
 
-  // Hiển thị giỏ hàng ra HTML
-  const renderCart = () => {
-    listCartHTML.innerHTML = '';
-    if (cart.length === 0) {
-      listCartHTML.innerHTML = '<p>Your cart is empty.</p>';
-      totalPriceHTML.innerText = '$0';
-      return;
-    }
+  checkoutBtn.disabled = false;
 
-    cart.forEach(item => {
-      const product = products.find(p => p.id === item.product_id);
-      if (!product) return;
+  cart.forEach(item => {
+    const product = products.find(p => p.id === item.product_id);
+    if (!product) return;
 
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('cart-item');
-      itemDiv.dataset.id = item.product_id;
+    const itemTotal = product.price * item.quantity;
+    total += itemTotal;
 
-      itemDiv.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="cart-item-img" />
-        <div class="cart-item-info">
-          <h3>${product.name}</h3>
-          <p>Price: $${product.price}</p>
-          <div class="quantity-control">
-            <button class="decrease" data-id="${product.id}">-</button>
-            <span class="quantity">${item.quantity}</span>
-            <button class="increase" data-id="${product.id}">+</button>
-          </div>
-          <p>Subtotal: $${(product.price * item.quantity).toFixed(2)}</p>
-          <button class="remove-item" data-id="${product.id}">Remove</button>
-        </div>
-      `;
-      listCartHTML.appendChild(itemDiv);
-    });
-    totalPriceHTML.innerText = '$' + calculateTotal().toFixed(2);
-  };
-
-  // Lắng nghe sự kiện click trên listCartHTML
-  listCartHTML.addEventListener('click', (e) => {
-    const target = e.target;
-    const id = parseInt(target.dataset.id);
-    if (!id) return;
-    if (target.classList.contains('increase')) {
-      changeQuantity(id, 1);
-    }
-    else if (target.classList.contains('decrease')) {
-      changeQuantity(id, -1);
-    }
-    else if (target.classList.contains('remove-item')) {
-      removeItem(id);
-    }
+    const itemElem = document.createElement("div");
+    itemElem.className = "item";
+    itemElem.innerHTML = `
+      <img src="${product.image}" alt="${product.name}">
+      <div class="info">
+        <strong>${product.name}</strong>
+        <span>Số lượng: ${item.quantity}</span>
+        <span>Thành tiền: $${itemTotal.toFixed(2)}</span>
+      </div>
+    `;
+    cartList.appendChild(itemElem);
   });
 
-  // Khởi tạo trang
-  const init = () => {
-    loadCart();
-    renderCart();
-  };
+  totalPriceElem.textContent = `$${total.toFixed(2)}`;
+}
 
-  init();
-};
+function showPopupAndOrderDetails() {
+  popup.style.display = "flex";
 
-checkoutPage();
+  setTimeout(() => {
+    popup.style.display = "none";
+    orderDetails.style.display = "block";
 
-export default checkoutPage;
+    const now = new Date();
+    document.getElementById("orderDate").textContent = now.toLocaleDateString("vi-VN");
+
+    document.querySelectorAll(".order-details .totalPrice").forEach(el => {
+      el.textContent = totalPriceElem.textContent;
+    });
+
+    localStorage.removeItem("cart");
+  }, 3000);
+}
+
+checkoutBtn.addEventListener("click", () => {
+  if (cart.length === 0) return;
+  showPopupAndOrderDetails();
+});
+
+renderCart();
