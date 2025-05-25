@@ -13,7 +13,6 @@ const cart = () => {
   iconCart.addEventListener('click', () => {
     body.classList.toggle('activeTabCart');
   });
-
   closeCart.addEventListener('click', () => {
     body.classList.toggle('activeTabCart');
   });
@@ -30,7 +29,6 @@ const cart = () => {
   const setProductInCart = (idProduct, value) => {
     idProduct = Number(idProduct);
     value = Number(value);
-
     let positionInCart = cart.findIndex(item => item.product_id === idProduct);
     if (value <= 0) {
       if (positionInCart >= 0) {
@@ -44,7 +42,6 @@ const cart = () => {
     } else {
       cart[positionInCart].quantity = value;
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
     addCartToHTML();
   };
