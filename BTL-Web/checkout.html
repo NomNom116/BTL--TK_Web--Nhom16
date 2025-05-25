@@ -3,59 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Đặt hàng thành công</title>
+  <title>Thanh toán</title>
   <style>
-    body {
+  
+  body {
       font-family: Arial, sans-serif;
       background-color: #f4f6f8;
       margin: 0;
       padding: 0;
     }
-
     .container {
-      max-width: 600px;
-      margin: 60px auto;
+      max-width: 800px;
+      margin: 40px auto;
       background-color: #fff;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
     }
 
     h1 {
-      color: #2ecc71;
-      font-size: 32px;
+      text-align: center;
+      color: #333;
     }
 
-    p {
+    .listCart .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+
+    .item img {
+      width: 60px;
+      height: auto;
+      margin-right: 15px;
+    }
+
+    .item .info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .total-container {
+      text-align: right;
+      font-size: 18px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .btn-checkout {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
       font-size: 16px;
-      color: #555;
-    }
-
-    .order-details {
-      margin: 20px 0;
-      text-align: left;
-    }
-
-    .order-details strong {
-      display: inline-block;
-      width: 140px;
-    }
-
-    .back-home {
-      display: inline-block;
-      margin-top: 30px;
-      padding: 12px 24px;
       background-color: #2ecc71;
       color: white;
       border: none;
       border-radius: 6px;
-      text-decoration: none;
+      cursor: pointer;
       transition: background-color 0.3s ease;
     }
 
-    .back-home:hover {
+    .btn-checkout:hover {
       background-color: #27ae60;
+    }
+
+    .order-details {
+      margin-top: 30px;
+      background-color: #ecf9f1;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .order-details p {
+      margin: 5px 0;
+    }
+
+    .order-details strong {
+      width: 140px;
+      display: inline-block;
+    }
+
+    .back-home {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #2ecc71;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
     }
 
     /* Popup */
@@ -82,7 +121,6 @@
 
     .popup-content h2 {
       color: #2ecc71;
-      margin-bottom: 10px;
     }
 
     @keyframes fadeIn {
@@ -93,21 +131,25 @@
 </head>
 <body>
 
-<!-- Nội dung chính -->
 <div class="container">
-  <h1>🎉 Đặt hàng thành công!</h1>
-  <p>Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi.</p>
+  <h1>Thanh toán</h1>
+  <div class="listCart">
+    <!-- Sản phẩm sẽ được JS thêm vào đây -->
+  </div>
+  <div class="total-container">
+    Tổng tiền: <span class="totalPrice">$0</span>
+  </div>
+  <button class="btn-checkout">Đặt hàng</button>
 
-  <div class="order-details">
+  <div class="order-details" style="display: none;">
     <p><strong>Mã đơn hàng:</strong> #123456</p>
-    <p><strong>Ngày đặt:</strong> 24/05/2025</p>
+    <p><strong>Ngày đặt:</strong> <span id="orderDate"></span></p>
     <p><strong>Khách hàng:</strong> Nguyễn Văn A</p>
     <p><strong>Địa chỉ:</strong> 123 Lê Lợi, TP.HCM</p>
     <p><strong>Phương thức thanh toán:</strong> Thanh toán khi nhận hàng</p>
-    <p><strong>Tổng tiền:</strong> 850.000đ</p>
+    <p><strong>Tổng tiền:</strong> <span class="totalPrice">0</span></p>
+    <a class="back-home" href="index.html">← Quay lại trang chủ</a>
   </div>
-
-  <a class="back-home" href="index.html">← Quay lại trang chủ</a>
 </div>
 
 <!-- Popup -->
@@ -117,20 +159,6 @@
     <p>Đơn hàng của bạn đang được xử lý. Chúng tôi sẽ liên hệ sớm nhất.</p>
   </div>
 </div>
-
-<!-- Script -->
-<script>
-  // Hiển thị popup khi tải trang
-  window.onload = function () {
-    const popup = document.getElementById("popup");
-    popup.style.display = "flex";
-
-    // Sau 5 giây, tự động ẩn popup
-    setTimeout(() => {
-      popup.style.display = "none";
-    }, 5000);
-  };
-</script>
-
+<script type="module" src="checkout.js"></script>
 </body>
 </html>
