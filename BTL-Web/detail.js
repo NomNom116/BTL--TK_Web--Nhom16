@@ -29,8 +29,9 @@ const initApp = () => {
     detail.querySelector('.image img').src = thisProduct.image;
     detail.querySelector('.name').innerText = thisProduct.name;
     detail.querySelector('.price').innerText = '$' + thisProduct.price;
-    detail.querySelector('.description').innerText = '$' + thisProduct.description;
+    detail.querySelector('.description').innerText = thisProduct.description;
     detail.querySelector('.addCart').dataset.id = thisProduct.id;
+
 
 
     let listProductHTML = document.querySelector('.listProduct');

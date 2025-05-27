@@ -36,8 +36,8 @@ document.getElementById('registerForm')?.addEventListener('submit', function(e) 
     alert('Registered successfully!');
     window.location.href = 'login.html';
 });
-const user = JSON.parse(localStorage.getItem('loggedInUser'));
-if (user) {
+const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+if (loggedInUser) {
     document.getElementById('userWelcome').innerText = `Hello, ${user.name}`;
     document.getElementById('logoutBtn').style.display = 'inline-block';
 }
