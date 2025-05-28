@@ -1,6 +1,14 @@
 body {
-  margin: 0;
-  font-family: Poppins, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  color: #333;
+}
+/* 2) Khung header flex */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative; /* cho search-container */
+  padding: 20px 0;
 }
 
 a {
@@ -18,7 +26,7 @@ svg {
 }
 
 .container {
-  width: 900px;
+  width: 1668px;
   margin: auto;
   max-width: 90vw;
   text-align: center;
@@ -35,14 +43,89 @@ header {
   gap: 15px;
 }
 
-nav.main-nav {
+/* Menu chính giữa */
+.main-nav {
   display: flex;
-  gap: 20px;
-  align-items: center;
+  gap: 24px;
+}
+.main-nav a {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #333;
+  text-decoration: none;
+  transition: color .2s;
+}
+.main-nav a:hover,
+.main-nav a.active {
+  color: #E53935;
 }
 
-nav.main-nav a {
-  font-weight: 500;
+/* Icons phải */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header-icons button,
+.header-icons .icon-cart {
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  padding: 4px;
+}
+.header-icons svg {
+  display: block;
+}
+.cart-count {
+  position: absolute;
+  top: -4px;      /* đẩy xuống chút so với trước */
+  right: -4px;    /* đẩy vào trong chút so với trước */
+  min-width: 16px;  /* độ rộng tối thiểu */
+  height: 16px;     /* chiều cao cố định */
+  font-size: 0.65rem; /* chữ nhỏ hơn */
+  padding: 0;        /* bỏ padding dư */
+  line-height: 16px; /* canh chữ giữa */
+  background: #E53935;
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+}
+
+/* Search bar ẩn/hiện */
+.search-container {
+  position: absolute;
+  top: 100%;       /* ngay dưới header */
+  left: 0;
+  width: 100%;     /* full-width container */
+  background: #fff;
+  padding: 16px 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+}
+
+/* Hiện khi active */
+.search-container.active {
+  display: block;
+}
+
+/* Center input và style giống mẫu */
+.search-container input {
+  width: 90%;               /* chiếm 90% chiều ngang */
+  max-width: 600px;         /* nhưng không quá 600px */
+  display: block;           /* block để margin:auto hoạt động */
+  margin: 0 auto;           /* canh giữa */
+  padding: 12px 16px;       /* giống padding mẫu */
+  font-size: 1rem;
+  border: 2px solid #333;   /* viền đậm như mẫu 2 */
+  border-radius: 4px;       /* bo góc nhẹ */
+  outline: none;
+  transition: border-color .2s;
+}
+.search-container input:focus {
+  border-color: #E53935;    /* đổi màu viền khi focus */
 }
 
 .menu-toggle {
@@ -114,6 +197,35 @@ body.activeTabCart .container {
   background-color: #eee;
 }
 
+.user-menu {
+  position: absolute;
+  top: 60px;       /* chỉnh cho vừa với header của bạn */
+  right: 60px;     /* đẩy vào vị trí gần nút user */
+  display: none;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+.user-menu.active {
+  display: block;
+}
+.user-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+.user-menu button:hover {
+  background: #f5f5f5;
+}
+
+
 .listCart {
   overflow: auto;
 }
@@ -181,6 +293,22 @@ body.activeTabCart .container {
   padding: 5px 10px;
   margin-top: 10px;
   border-radius: 20px;
+}
+
+/* Logo + title */
+.site-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.site-logo {
+  width: 36px; 
+  margin-right: 8px;
+}
+.site-title {
+  font-size: 1.4rem; 
+  font-weight: 700; 
+  color: #111;
 }
 
 /* Detail page */
@@ -266,6 +394,7 @@ body.activeTabCart .container {
 }
 
 @media only screen and (max-width: 767px) {
+  .main-nav { display: none; }
   .listProduct {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -286,5 +415,119 @@ body.activeTabCart .container {
   }
   .detail .buttons {
     justify-content: center;
+  }
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;   /* xếp cột thay vì hàng */
+  align-items: center;      /* canh giữa ngang */
+  padding: 80px 5%;
+  background-color: #fff;
+}
+
+/* Giới hạn độ rộng khuôn chứa text+ảnh */
+.hero-content {
+  max-width: 800px;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+/* Ảnh chiếm đầy khoảng không, tỉ lệ đúng */
+.hero-image img {
+  width: 100%;
+  max-width: 800px;         /* giới hạn chiều rộng */
+  height: auto;
+  margin-bottom: 40px;      /* khoảng cách đến text */
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;      /* 12px 24px */
+  font-size: 1rem;              /* 16px */
+  font-weight: 500;
+  background-color: #2F2F2F;    /* đen xám */
+  color: #ffffff;               /* trắng chữ */
+  border: none;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background-color .2s, transform .1s;
+}
+
+.btn-primary:hover {
+  background-color: #444444;    /* nhạt hơn khi hover */
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  background-color: #1f1f1f;    /* tối hơn khi nhấn */
+  transform: translateY(1px);
+}
+
+/* Filter bar layout */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;              /* khoảng cách giữa các control */
+  justify-content: center;/* canh giữa toàn bộ */
+  margin-bottom: 2rem;
+}
+
+/* Common styles for inputs/selects */
+.filter-bar input,
+.filter-bar select {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+/* Placeholder màu nhạt hơn */
+.filter-bar input::placeholder {
+  color: #999;
+}
+
+/* Focus styles */
+.filter-bar input:focus,
+.filter-bar select:focus {
+  outline: none;
+  border-color: #2F2F2F;
+  box-shadow: 0 0 0 3px rgba(47,47,47,0.15);
+}
+
+/* Điều chỉnh width */
+.filter-bar input {
+  width: 280px;    /* bạn có thể tuỳ chỉnh */
+  max-width: 100%;
+}
+.filter-bar select {
+  width: 160px;
+}
+
+/* Responsive: trên mobile, xếp cột */
+@media (max-width: 600px) {
+  .filter-bar {
+    flex-direction: column;
+  }
+  .filter-bar input,
+  .filter-bar select {
+    width: 100%;
   }
 }

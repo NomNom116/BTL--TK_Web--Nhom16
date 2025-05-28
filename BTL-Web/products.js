@@ -1,10 +1,10 @@
 const products = [
     {
         "id": 1,
-        "name":" LD01 LOUNGE CHAIR",
-        "price": 200,
+        "name":"Vợt Tennis Wilson Blade 100L v8",
+        "price": 4299000,
         "image": "images/1.png",
-        "description": "Expertly rendered by Carl Hansen & Søn, the lounge chair—first introduced in 1951 and enduring ever since—is available in oak or as a combination of oak and walnut, sourced from sustainable forestry. Choose from seat and back upholstery in a selection of leather options or in a custom fabric."
+        "description": "Vợt tennis Wilson Blade V8 2021 với thiết kế độc đáo có thể thay đổi màu sắc tùy thuộc vào góc nhìn với màu xanh đậm. Wilson Blade V8 được xem là dòng vợt kiểm soát cực tốt dành cho người đã nắm bắt kỹ thuật và lối đánh thích tấn công, kiểm soát trong các trận đấu."
     },
     {
         "id": 2,
