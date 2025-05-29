@@ -3,12 +3,10 @@
 export function initHeader() {
   // Mobile menu toggle
   const menuToggle = document.getElementById('menuToggle');
-  const mainNav = document.getElementById('mainNav');
-  if (menuToggle && mainNav) {
-    menuToggle.addEventListener('click', () => {
-      document.body.classList.toggle('menu-open');
-    });
-  }
+  if (!menuToggle) return;
+  menuToggle.addEventListener('click', () => {
+    document.body.classList.toggle('menu-open');
+  });
 
   // Toggle search bar
   const searchBtn = document.getElementById('searchBtn');

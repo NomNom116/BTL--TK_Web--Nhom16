@@ -25,7 +25,7 @@ const initDetail = () => {
   const detail = document.querySelector('.detail');
   detail.querySelector('.image img').src = prod.image;
   detail.querySelector('.name').innerText = prod.name;
-  detail.querySelector('.price').innerText = 'VND' + prod.price;
+  detail.querySelector('.price').innerText = prod.price + 'đ';
   detail.querySelector('.description').innerText = prod.description;
   detail.querySelector('.addCart').dataset.id = prod.id;
 
@@ -39,7 +39,7 @@ const initDetail = () => {
         <img src="${p.image}" alt="${p.name}" />
       </a>
       <h2>${p.name}</h2>
-      <div class="price">VND ${p.price}</div>
+      <div class="price">${p.price}đ</div>
       <button class="addCart" data-id="${p.id}">Add To Cart</button>`;
     listSimilar.appendChild(el);
   });

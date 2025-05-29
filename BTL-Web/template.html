@@ -57,87 +57,63 @@
 </head>
 <body>
   <div class="container">
-<header class="site-header">
-  <!-- Logo + Title -->
-  <a href="home.html" class="site-brand">
-    <img src="logo/logo.png" alt="FitFriend" class="site-logo" />
-    <span class="site-title">FitFriend</span>
-  </a>
+  <header class="site-header">
 
-  <!-- Main Nav -->
-  <nav class="main-nav">
+    <!-- Logo + Title -->
+        <a href="home.html" class="site-brand">
+          <img src="logo/logo.png" alt="FitFriend" class="site-logo" />
+          <span class="site-title">FitFriend</span>
+        </a>
+
+        <!-- Main Nav (give it an id so your header.js can find it) -->
+        <nav class="main-nav">
+    <a href="home.html">Home</a>
     <a href="category.html">Shop</a>
     <a href="checkout.html">Checkout</a>
     <a href="support.html">Support</a>
   </nav>
 
-  <!-- Search input ẩn/hiện -->
   <div id="searchContainer" class="search-container">
     <form id="searchForm">
       <input type="text" id="searchField" placeholder="I'm looking for…" />
     </form>
   </div>
 
-  <!-- Icons phải -->
   <div class="header-icons">
-    <!-- 1. Search -->
-    <button id="searchBtn" aria-label="Search">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="11" cy="11" r="7" stroke="#333" stroke-width="2"/>
-        <line x1="16.656" y1="16.97" x2="21" y2="21.313"
-              stroke="#333" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-
-    <!-- 2. User -->
-    <button id="userBtn" aria-label="User">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="7" r="5" stroke="#333" stroke-width="2"/>
-        <path d="M4 21c0-4 4-7 8-7s8 3 8 7"
-              stroke="#333" stroke-width="2" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <div id="userMenu" class="user-menu"></div>
-
-    <!-- 3. Cart -->
-    <div id="cartBtn" class="icon-cart" aria-label="Cart">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-        <path d="M6 6h15l-1.5 9h-13l-1.5-9z"
-              stroke="#333" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="9" cy="21" r="1" fill="#333"/>
-        <circle cx="18" cy="21" r="1" fill="#333"/>
-      </svg>
-      <span class="cart-count">0</span>
-    </div>
+  <div class="header-icons">
+  <button id="searchBtn" aria-label="Search">
+    <img src="icons/magnifer-icon.png" alt="Tìm kiếm" class="icon-btn" />
+  </button>
+  <button id="userBtn" aria-label="User">
+    <img src="icons/user-icon.png" alt="Người dùng" class="icon-btn" />
+  </button>
+  <div id="userMenu" class="user-menu">
+  <p id="userWelcome">Hello, Guest</p>
+  <button id="logoutBtn" style="display:none">Logout</button>
   </div>
-</header>
+  <button id="cartBtn" class="icon-cart" aria-label="Cart">
+    <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
+    <span class="cart-count">0</span>
+  </button>
+</div>
+  </header>
 
-    <!-- Nội dung từng page load vào đây -->
-    <div id="contentTab"></div>
+  <div id="contentTab"></div>
   </div>
 
-  <!-- Cart slide-out panel (phải để ngoài header-icons) -->
-  <!-- Redesigned Cart panel -->
   <div class="cartTab">
     <header class="cart-header">
-      <h2>Shopping Cart</h2>
+      <h2>Shopping Bag</h2>
       <button class="close-cart" aria-label="Close">&times;</button>
     </header>
 
-    <ul class="cart-list">
-      <!-- JS sẽ render <li> sản phẩm vào đây -->
-    </ul>
+    <ul class="cart-list"></ul>
 
     <footer class="cart-footer">
-      <div class="total">
-        <span>Total:</span>
-        <strong class="total-price">$0.00</strong>
-      </div>
-      <button class="btn btn-checkout">Check Out</button>
+      <div>Total: <strong class="total-price">$0.00</strong></div>
+      <button class="btn-checkout">Check Out</button>
     </footer>
   </div>
-
 
   <!-- script inline bảo vệ trang & logout nếu cần -->
   <script>

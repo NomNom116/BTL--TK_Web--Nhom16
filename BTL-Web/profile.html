@@ -1,101 +1,277 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile - FitFriend</n>
-  <!-- Google Font -->
+  <title>Trang cá nhân - FitFriend</title>
+  <!-- Google Font Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
+  <style>
+    :root {
+      --primary: #000000;
+      --accent: #000000;
+      --bg: #ffffff;
+      --card-bg: #fff;
+      --text: #333;
+      --light: #fafafa;
+      --border: #e0e0e0;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      font-family: 'Montserrat', sans-serif;
+      color: var(--text);
+    }
+    .profile-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .profile-card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .profile-header {
+      background: var(--accent);
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    .profile-header h1 {
+      margin: 0;
+      font-size: 2rem;
+      letter-spacing: 1px;
+    }
+    .profile-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      background: var(--light);
+    }
+    .avatar-section {
+      text-align: center;
+    }
+    .avatar-section img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid var(--primary);
+    }
+    #changeAvatarBtn {
+      margin-top: 1rem;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    #changeAvatarBtn:hover {
+      background: #3333333a;
+    }
+    .profile-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .profile-form .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-form label {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+    .profile-form input {
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+    }
+    .profile-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .btn-save {
+      margin-top: 0.5rem;
+      padding: 0.75rem;
+      background: #000000;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      align-self: start;
+      transition: background 0.2s;
+    }
+    .btn-save:hover {
+      background: #3a3a3a;
+    }
+    .order-history {
+      grid-column: 1 / -1;
+      margin-top: 1rem;
+    }
+    .order-history h2 {
+      font-size: 1.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .order-history-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    @media(min-width: 600px) {
+      .order-history-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .order-history-list li {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .order-history-list li p {
+      margin: 0;
+    }
+    .order-history-list li p span {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    @media(max-width: 768px) {
+      .profile-body {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header (copy from template.html) -->
-    <header class="site-header">
-      <a href="index.html" class="site-brand">
-        <img src="logo/logo.png" alt="FitFriend" class="site-logo" />
-        <span class="site-title">FitFriend</span>
-      </a>
-      <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="category.html">Shop</a>
-        <a href="checkout.html">Checkout</a>
-        <a href="support.html">Support</a>
-      </nav>
-      <div id="searchContainer" class="search-container">
-        <form id="searchForm">
-          <input type="text" id="searchField" placeholder="Search products…" />
+  <div id="app"></div>
+
+  <template id="temporaryContent">
+    <div class="profile-card">
+      <div class="profile-header">
+        <h1>Thông tin cá nhân</h1>
+      </div>
+      <div class="profile-body">
+        <div class="avatar-section">
+          <img id="avatarImg" src="icons/default-avatar.png" alt="Avatar" />
+          <button id="changeAvatarBtn">Thay đổi ảnh đại diện</button>
+          <input type="file" id="avatarInput" accept="image/*" style="display:none" />
+        </div>
+        <form id="profileForm" class="profile-form">
+          <div class="form-group">
+            <label for="fullname">Họ và tên</label>
+            <input type="text" id="fullname" name="fullname" required />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Số điện thoại</label>
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="address">Địa chỉ</label>
+            <input type="text" id="address" name="address" />
+          </div>
+          <button type="submit" class="btn-save">Lưu thay đổi</button>
         </form>
-      </div>
-      <div class="header-icons">
-        <button id="searchBtn" aria-label="Search">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <circle cx="11" cy="11" r="7" stroke="#333" stroke-width="2"/>
-            <line x1="16.656" y1="16.97" x2="21" y2="21.313" stroke="#333" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <button id="userBtn" aria-label="User">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="7" r="5" stroke="#333" stroke-width="2"/>
-            <path d="M4 21c0-4 4-7 8-7s8 3 8 7" stroke="#333" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-        <div id="cartBtn" class="icon-cart" aria-label="Cart">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M6 6h15l-1.5 9h-13l-1.5-9z" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="9" cy="21" r="1" fill="#333"/>
-            <circle cx="18" cy="21" r="1" fill="#333"/>
-          </svg>
-          <span class="cart-count">0</span>
-        </div>
-      </div>
-    </header>
-
-    <!-- Profile Content -->
-    <div id="contentTab" class="profile-content">
-      <div class="profile-container">
-        <h1>Thông tin tài khoản</h1>
-        <div class="profile-field">
-          <strong>Họ và tên:</strong> <span id="profileName"></span>
-        </div>
-        <div class="profile-field">
-          <strong>Email:</strong> <span id="profileEmail"></span>
-        </div>
-        <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
+        <section class="order-history">
+          <h2>Lịch sử mua hàng</h2>
+          <ul id="orderHistoryList" class="order-history-list"></ul>
+        </section>
       </div>
     </div>
-  </div>
+  </template>
 
-  <!-- Cart panel -->
-  <div class="cartTab">
-    <h1>Shopping Cart</h1>
-    <div class="listCart"></div>
-    <div class="btn">
-      <button class="close">CLOSE</button>
-      <button class="checkOut">Check Out</button>
-    </div>
-  </div>
+  <script type="module">
+    import { initHeader } from './header.js';
+    fetch('template.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('app').innerHTML = html;
+        document.getElementById('contentTab').innerHTML = document.getElementById('temporaryContent').innerHTML;
+        document.getElementById('temporaryContent').innerHTML = '';
+        initHeader();
 
-  <!-- Scripts -->
-  <script type="module" src="cart.js"></script>
-  <script type="module" src="header.js"></script>
-  <script>
-    // Kiểm tra login
-    const user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!user) {
-      alert('Vui lòng đăng nhập để xem thông tin tài khoản.');
-      window.location.href = 'login.html';
-    } else {
-      document.getElementById('profileName').innerText = user.name;
-      document.getElementById('profileEmail').innerText = user.email;
-    }
+        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        if (!user) {
+          alert('Vui lòng đăng nhập để truy cập trang này.');
+          window.location.href = 'login.html';
+          return;
+        }
+        user.orders = user.orders || [];
 
-    // Logout
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      localStorage.removeItem('loggedInUser');
-      window.location.href = 'index.html';
-    });
+        const avatarImg        = document.getElementById('avatarImg');
+        const changeAvatarBtn  = document.getElementById('changeAvatarBtn');
+        const avatarInput      = document.getElementById('avatarInput');
+        const profileForm      = document.getElementById('profileForm');
+        const orderHistoryList = document.getElementById('orderHistoryList');
+
+        // Pre-fill
+        document.getElementById('fullname').value = user.name || '';
+        document.getElementById('email').value    = user.email || '';
+        document.getElementById('phone').value    = user.phone || '';
+        document.getElementById('address').value  = user.address || '';
+        if (user.avatar) avatarImg.src = user.avatar;
+
+        changeAvatarBtn.addEventListener('click', () => avatarInput.click());
+        avatarInput.addEventListener('change', e => {
+          const file = e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = () => avatarImg.src = reader.result;
+          reader.readAsDataURL(file);
+        });
+
+        function renderOrderHistory() {
+          orderHistoryList.innerHTML = '';
+          if (user.orders.length === 0) {
+            orderHistoryList.innerHTML = '<li>Chưa có đơn hàng nào.</li>';
+            return;
+          }
+          user.orders.forEach(order => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+              <p>${order.date}</p>
+              <p>Tổng: <span>${order.total}</span></p>
+            `;
+            orderHistoryList.appendChild(li);
+          });
+        }
+        renderOrderHistory();
+
+        profileForm.addEventListener('submit', e => {
+          e.preventDefault();
+          user.name    = document.getElementById('fullname').value.trim();
+          user.email   = document.getElementById('email').value.trim();
+          user.phone   = document.getElementById('phone').value.trim();
+          user.address = document.getElementById('address').value.trim();
+          user.avatar  = avatarImg.src;
+          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          alert('Cập nhật thông tin thành công!');
+        });
+      })
+      .catch(err => console.error('Error loading template:', err));
   </script>
 </body>
 </html>

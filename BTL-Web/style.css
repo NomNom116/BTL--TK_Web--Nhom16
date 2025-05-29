@@ -1,6 +1,7 @@
 body {
   font-family: 'Montserrat', sans-serif;
   color: #333;
+  overflow-x: hidden;
 }
 /* 2) Khung header flex */
 .site-header {
@@ -9,6 +10,8 @@ body {
   justify-content: space-between;
   position: relative; /* cho search-container */
   padding: 20px 0;
+  margin-bottom: 0;
+  z-index: 10;
 }
 
 a {
@@ -62,35 +65,33 @@ header {
 }
 
 /* Icons phải */
-.header-icons {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.header-icons button,
-.header-icons .icon-cart {
+.header-icons button {
   background: none;
   border: none;
+  padding: 8px;
+  margin: 0 4px;
   cursor: pointer;
-  position: relative;
-  padding: 4px;
 }
-.header-icons svg {
+
+.header-icons .icon-btn {
+  width: 50px;
+  height: 50px;
   display: block;
 }
+
+.icon-cart {
+  position: relative;
+}
+
 .cart-count {
   position: absolute;
-  top: -4px;      /* đẩy xuống chút so với trước */
-  right: -4px;    /* đẩy vào trong chút so với trước */
-  min-width: 16px;  /* độ rộng tối thiểu */
-  height: 16px;     /* chiều cao cố định */
-  font-size: 0.65rem; /* chữ nhỏ hơn */
-  padding: 0;        /* bỏ padding dư */
-  line-height: 16px; /* canh chữ giữa */
-  background: #E53935;
-  color: #fff;
+  top: 2px;
+  right: 2px;
+  width: 2px;
+  height: 2px;
+  background: #e74c3c;
   border-radius: 50%;
-  text-align: center;
+  display: none;
 }
 
 /* Search bar ẩn/hiện */
@@ -130,8 +131,10 @@ header {
 
 .menu-toggle {
   display: none;
-  font-size: 26px;
-  cursor: pointer;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;;
 }
 
 .user-control {
@@ -176,7 +179,7 @@ body.activeTabCart .cartTab {
   right: 0;
 }
 body.activeTabCart .container {
-  transform: translateX(-250px);
+  transform: translateX(-260px);
 }
 
 .cartTab h1 {
@@ -199,32 +202,38 @@ body.activeTabCart .container {
 
 .user-menu {
   position: absolute;
-  top: 60px;       /* chỉnh cho vừa với header của bạn */
-  right: 60px;     /* đẩy vào vị trí gần nút user */
-  display: none;
+  top: 70px;
+  right: 100px;
   background: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: none;
   z-index: 1000;
 }
 .user-menu.active {
   display: block;
 }
-.user-menu button {
+.user-menu.show {
   display: block;
-  width: 100%;
-  padding: 8px 16px;
+}
+.user-menu p {
+  margin: 0 0 0.5rem;
+  font-weight: 500;
+}
+.user-menu button {
+  font-family: 'Montserrat';
+  background: #ffffff;
+  color: #000000;
   border: none;
-  background: none;
-  text-align: left;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-family: inherit;
 }
 .user-menu button:hover {
-  background: #f5f5f5;
+  background: #8c8888;
 }
-
 
 .listCart {
   overflow: auto;
@@ -418,18 +427,12 @@ body.activeTabCart .container {
   }
 }
 
-.hero {
-  display: flex;
-  flex-direction: column;   /* xếp cột thay vì hàng */
-  align-items: center;      /* canh giữa ngang */
-  padding: 80px 5%;
-  background-color: #fff;
-}
-
-/* Giới hạn độ rộng khuôn chứa text+ảnh */
-.hero-content {
+/* Giới hạn độ rộng khuôn chứa text*/
+#contentTab .hero-content {
   max-width: 800px;
+  margin: 0 auto;
   text-align: center;
+  padding: 40px 20px;
 }
 
 .hero-content h1 {
@@ -445,11 +448,33 @@ body.activeTabCart .container {
 }
 
 /* Ảnh chiếm đầy khoảng không, tỉ lệ đúng */
-.hero-image img {
+
+#contentTab .hero {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  padding: 0;
+  max-width: none;   /* bỏ giới hạn width từ container */
+}
+
+/* Ảnh trong hero luôn cover full-width */
+#contentTab .hero-image {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+#contentTab .hero-image img {
+  display: block;
   width: 100%;
-  max-width: 800px;         /* giới hạn chiều rộng */
   height: auto;
-  margin-bottom: 40px;      /* khoảng cách đến text */
+  object-fit: cover;
 }
 
 .btn-primary {
@@ -530,4 +555,129 @@ body.activeTabCart .container {
   .filter-bar select {
     width: 100%;
   }
+}
+/* Slide-out Cart đẹp hơn */
+.cartTab {
+  width: 360px;
+  background: #222;
+  color: #fff;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  transition: right 0.3s;
+}
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #111;
+}
+.cart-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+.close-cart {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.cart-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+}
+.cart-list .cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;             /* khoảng giữa các khu vực */
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #444;
+}
+
+/* 1. Ảnh + Tên sản phẩm */
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 2;               /* chiếm 2 phần không gian */
+}
+.item-img {
+  width: 60px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.item-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.item-name {
+  font-size: 1rem;
+  margin: 0;
+  color: #fff;
+}
+.item-model {
+  font-size: 0.85rem;
+  color: #ccc;
+  margin: 2px 0 0;
+}
+
+/* 2. Số lượng */
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+.item-quantity button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #222;
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.item-quantity span {
+  min-width: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+/* 3. Giá tiền */
+.item-price {
+  flex: 1;
+  text-align: right;
+  font-weight: bold;
+  color: #fff;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background: #111;
+}
+.cart-footer .total-price {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.btn-checkout {
+  background: #27ae60;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+.btn-checkout:hover {
+  background: #219150;
 }

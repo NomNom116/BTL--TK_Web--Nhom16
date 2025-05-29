@@ -1,43 +1,43 @@
 import products from './products.js';
-import cart from './cart.js';
+import initCart from './cart.js';
 import { initHeader } from './header.js';
 
 const app = document.getElementById('app');
-const tempContent = document.getElementById('temporaryContent');
+const temp = document.getElementById('temporaryContent');
 
 fetch('template.html')
   .then(res => res.text())
   .then(html => {
     app.innerHTML = html;
-    document.getElementById('contentTab').innerHTML = tempContent.innerHTML;
-    tempContent.innerHTML = null;
+    document.getElementById('contentTab').innerHTML = temp.innerHTML;
+    temp.innerHTML = '';
 
-    // Khởi header & cart
     initHeader();
-    cart();
 
-    // Thiết lập filter và render danh sách
+    // Render lần đầu với toàn bộ products
+    renderProducts(products);
+
+    // Gắn event-delegation cho nút AddToCart
+    initCart();
+
+    // Khởi tạo filter (sẽ gọi renderProducts() lại khi filter thay đổi)
     initFilter();
   })
   .catch(err => console.error('Error loading template:', err));
 
-// Renders a list of products
 function renderProducts(list) {
   const container = document.querySelector('.listProduct');
-  container.innerHTML = '';
-  list.forEach(p => {
-    const div = document.createElement('div');
-    div.classList.add('item');
-    div.innerHTML = `
-      <a href="detail.html?id=${p.id}">
-        <img src="${p.image}" alt="${p.name}" />
-      </a>
-      <h2>${p.name}</h2>
-      <div class="price">VND ${p.price}</div>
-      <button class="addCart" data-id="${p.id}">Add To Cart</button>
-    `;
-    container.appendChild(div);
-  });
+  container.innerHTML = list
+    .map(p => `
+      <div class="item">
+        <a href="detail.html?id=${p.id}">
+          <img src="${p.image}" alt="${p.name}" />
+        </a>
+        <h2>${p.name}</h2>
+        <div class="price">${p.price}đ</div>
+        <button class="addCart" data-id="${p.id}">Add To Cart</button>
+      </div>
+    `).join('');
 }
 
 // Initializes filters: search & price
