@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitFriend – Support</title>
+  <!-- Google Font Montserrat -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <!-- CSS chung của website -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="temporaryContent">
+    <main class="support-page">
+      <!-- 1) Hero/Banner -->
+      <section class="support-hero">
+        <div class="support-hero-content">
+          <h1>Need Help? We’ve Got You Covered.</h1>
+          <p>
+            We are always ready to address your inquiries, offer technical assistance, and receive your feedback.
+          </p>
+        </div>
+        <div class="support-hero-image">
+          <img src="design/support.png" alt="Support Illustration" />
+        </div>
+      </section>
+
+      <!-- 2) Trợ giúp nhanh -->
+      <section class="support-contact-info">
+        <div class="contact-card">
+          <img src="icons/phone.png" alt="Phone Icon" class="contact-icon" />
+          <h3>Hotline</h3>
+          <p>+84 123 456 789</p>
+          <p>Monday – Friday: 8:00 AM – 6:00 PM</p>
+        </div>
+        <div class="contact-card">
+          <img src="icons/email.png" alt="Email Icon" class="contact-icon" />
+          <h3>Email</h3>
+          <p><a href="mailto:support@fitfriend.com">support@fitfriend.com</a></p>
+          <p>Our team responds to all inquiries within 24 hours</p>
+        </div>
+        <div class="contact-card">
+          <img src="icons/chat.png" alt="Chat Icon" class="contact-icon" />
+          <h3>Live Chat</h3>
+          <p>Contact us by chat</p>
+        </div>
+      </section>
+
+      <!-- 3) Hỏi đáp thường gặp (FAQs) -->
+      <section class="support-faq">
+        <h2 class="section-title">Common Questions</h2>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>1. How can I track my order?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                To track your order, please log in to your account and navigate to the 'Order Status' section. Alternatively, you can use your order number and access the tracking page via the link provided on our website.
+                <a href="order-status.html">Order Status</a>.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>2. What is your return and exchange policy?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                We accept returns or exchanges within 30 days from the date of delivery, provided the items are unused, with original tags and packaging intact. For more details, please see visit
+                <a href="returns.html">Return policies</a>.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>3. Forgot your password?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                Click here to reset your password
+                <a href="forgot.html">Forgot password</a>, Enter the email address you used to register, and follow the instructions in the email to set a new password.
+              </p>
+            </div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>4. I would like to contact technical support. Where can I reach them?</span>
+              <span class="faq-toggle-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>
+                For technical issues regarding the website, please send an email to
+                <a href="mailto:techsupport@fitfriend.com">techsupport@fitfriend.com</a> or contact our hotline
+                Hotline +84 123 456 789 (key 2).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4) Biểu mẫu liên hệ (Contact Form) -->
+      <section class="support-form-section">
+        <h2 class="section-title">Support request</h2>
+        <form class="support-form" action="submit-support" method="POST">
+          <div class="form-group">
+            <label for="support-name">Name</label>
+            <input 
+            type="text" 
+            id="support-name" 
+            name="name" 
+            placeholder="Enter name..." required />
+          </div>
+          <div class="form-group">
+            <label for="support-email">Email</label>
+            <input
+              type="email"
+              id="support-email"
+              name="email"
+              placeholder="Enter email..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="support-subject">Subject</label>
+            <input
+              type="text"
+              id="support-subject"
+              name="subject"
+              placeholder="Enter subject title..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="support-message">Content</label>
+            <textarea
+              id="support-message"
+              name="message"
+              rows="5"
+              placeholder="Compose issues..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn-primary">Submit</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="faq.js"></script>
+</body>
+</html>

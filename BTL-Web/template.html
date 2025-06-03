@@ -6,25 +6,6 @@
     <title>FitFriend</title>
     <link rel="stylesheet" href="style.css" />
     <style>
-    /* Responsive navbar enhancements */
-    .menu-toggle {
-        display: none;
-        font-size: 26px;
-        cursor: pointer;
-    }
-
-    nav.main-nav {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-
-    nav.main-nav a {
-        text-decoration: none;
-        color: #2F2F2F;
-        font-weight: 500;
-    }
-
     @media only screen and (max-width: 768px) {
       .menu-toggle {
         display: block;
@@ -58,19 +39,68 @@
 <body>
   <div class="container">
   <header class="site-header">
+  <a href="home.html" class="site-brand">
+    <img src="design/logo.png" alt="FitFriend" class="site-logo" />
+    <span class="site-title">FitFriend</span>
+  </a>
+  <button id="menuToggle" class="menu-toggle" aria-label="Menu">☰</button>
 
-    <!-- Logo + Title -->
-        <a href="home.html" class="site-brand">
-          <img src="logo/logo.png" alt="FitFriend" class="site-logo" />
-          <span class="site-title">FitFriend</span>
-        </a>
+  <!-- Menu điều hướng -->
+  <nav id="mainNav" class="main-nav">
+    <ul class="nav-list">
+      <!-- Category -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link">Category</a>
+        <div class="dropdown">
+          <div class="dropdown-list">
+            <a href="category.html?cat=rackets">Rackets</a>
+            <a href="category.html?cat=bags">Bags</a>
+            <a href="category.html?cat=accessories">Accessories</a>
+          </div>
+          <div class="dropdown-image">
+            <img src="design/category.jpg" alt="Category" />
+          </div>
+        </div>
+      </li>
 
-        <!-- Main Nav (give it an id so your header.js can find it) -->
-        <nav class="main-nav">
-    <a href="home.html">Home</a>
-    <a href="category.html">Shop</a>
-    <a href="checkout.html">Checkout</a>
-    <a href="support.html">Support</a>
+      <!-- Men -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link">Men</a>
+        <div class="dropdown">
+          <div class="dropdown-list">
+            <a href="category.html?cat=men-tops">Men’s Tops</a>
+            <a href="category.html?cat=men-bottoms">Men’s Bottoms</a>
+          </div>
+          <div class="dropdown-image">
+            <img src="design/men-outfit.jpg" alt="Men’s" />
+          </div>
+        </div>
+      </li>
+
+      <!-- Women -->
+      <li class="nav-item has-dropdown">
+        <a href="#" class="nav-link">Women</a>
+        <div class="dropdown">
+          <div class="dropdown-list">
+            <a href="category.html?cat=women-tops">Women’s Tops</a>
+            <a href="category.html?cat=women-bottoms">Women’s Bottoms</a>
+          </div>
+          <div class="dropdown-image">
+            <img src="design/women-outfit.jpg" alt="Women’s" />
+          </div>
+        </div>
+      </li>
+
+      <!-- Shoes -->
+      <li class="nav-item">
+        <a href="shoes.html" class="nav-link">Shoes</a>
+      </li>
+
+      <!-- Deals -->
+      <li class="nav-item">
+        <a href="deals.html" class="nav-link">Deals</a>
+      </li>
+    </ul>
   </nav>
 
   <div id="searchContainer" class="search-container">
@@ -80,40 +110,91 @@
   </div>
 
   <div class="header-icons">
-  <div class="header-icons">
-  <button id="searchBtn" aria-label="Search">
-    <img src="icons/magnifer-icon.png" alt="Tìm kiếm" class="icon-btn" />
-  </button>
-  <button id="userBtn" aria-label="User">
-    <img src="icons/user-icon.png" alt="Người dùng" class="icon-btn" />
-  </button>
-  <div id="userMenu" class="user-menu">
-  <p id="userWelcome">Hello, Guest</p>
-  <button id="logoutBtn" style="display:none">Logout</button>
+    <button id="searchBtn" aria-label="Search">
+      <img src="icons/magnifer-icon.png" alt="Tìm kiếm" class="icon-btn" />
+    </button>
+    <button id="userBtn" aria-label="User">
+      <img src="icons/user-icon.png" alt="Người dùng" class="icon-btn" />
+    </button>
+    <div id="userMenu" class="user-menu">
+      <p id="userWelcome">Hello, Guest</p>
+      <button id="logoutBtn" style="display:none">Logout</button>
+    </div>
+    <button id="cartBtn" class="icon-cart" aria-label="Cart">
+      <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
+      <span class="cart-count"></span>
+    </button>
   </div>
-  <button id="cartBtn" class="icon-cart" aria-label="Cart">
-    <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
-    <span class="cart-count">0</span>
-  </button>
-</div>
   </header>
 
   <div id="contentTab"></div>
   </div>
 
+  <!--Cart-->
   <div class="cartTab">
     <header class="cart-header">
       <h2>Shopping Bag</h2>
       <button class="close-cart" aria-label="Close">&times;</button>
     </header>
 
-    <ul class="cart-list"></ul>
+    <div class="cart-items"></div>
 
-    <footer class="cart-footer">
-      <div>Total: <strong class="total-price">$0.00</strong></div>
-      <button class="btn-checkout">Check Out</button>
-    </footer>
+    <div class="cart-footer">
+    <div class="subtotal">
+      Subtotal: <span class="item-count">0</span> Amount: <span class="subtotal-amount">0.00đ</span>
+    </div>
+    <div class="footer-buttons">
+      <a href="checkout.html" class="btn-checkout">Checkout</a>
+    </div>
   </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <address>
+          FitFriend Store:<br>
+          12 Chua Boc, Dong Da<br>
+          Ha Noi, Vietnam 10000
+        </address>
+        <p>Phone: <a href="tel:+84123456789">+84 123 456 789</a></p>
+        <p>Email: <a href="mailto:info@fitfriend.com">info@fitfriend.com</a></p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+      </div>
+      <div class="footer-service">
+        <h4>Customer Service</h4>
+        <ul>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="shipping.html">Shipping</a></li>
+          <li><a href="returns.html">Returns</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <a href="#" aria-label="Facebook"><img src="icons/facebook.png" alt="Facebook"/></a>
+        <a href="#" aria-label="Instagram"><img src="icons/instagram.png" alt="Instagram"/></a>
+        <a href="#" aria-label="Tik Tok"><img src="icons/tiktok.png" alt="Tik Tok"/></a>
+        <a href="#" aria-label="YouTube"><img src="icons/youtube.png" alt="YouTube"/></a>
+      </div>
+      <div class="footer-newsletter">
+        <h4>Become an Insider</h4>
+        <form id="newsletterForm">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">SIGN UP</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FitFriend. All rights reserved.</p>
+    </div>
+  </footer>
 
   <!-- script inline bảo vệ trang & logout nếu cần -->
   <script>
@@ -142,6 +223,5 @@
       document.body.classList.toggle('menu-open');
     });
   </script>
-  
 </body>
 </html>

@@ -100,4 +100,14 @@ function initFilter() {
     u.searchParams.set('price', priceFilter.value);
     window.history.replaceState({}, '', u);
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const categoryParam = urlParams.get('cat');
+  if (categoryParam) {
+    // Chỉ show sản phẩm cùng category (giả sử products.js có trường p.category)
+    productsToShow = products.filter(p => p.category === categoryParam);
+    renderProducts(productsToShow);
+    // Bỏ qua filter-bar nếu không cần
+    return;
+  }
 }

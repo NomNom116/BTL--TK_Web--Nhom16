@@ -11,24 +11,85 @@
 <div id="app"></div>
   <div id="temporaryContent">
     <main class="hero">
-      <!-- Ảnh -->
-      <div class="hero-image">
-        <img src="logo/home.jpeg" alt="FitFriend Hero" />
-      </div>
-
-      <!-- text & nút -->
-      <div class="hero-content">
-        <h1>Welcome to FitFriend</h1>
+    <div class="hero-image">
+      <img src="design/home.jpg" alt="FitFriend Hero" />
+      <div class="hero-overlay">
+        <h1>FitFriend Sport Professionals</h1>
         <p>
           At FitFriend, we curate an exclusive selection of premium tennis equipment and apparel tailored for discerning athletes. 
           From elite-performance rackets to sophisticated, court-ready attire, 
           every product reflects our commitment to quality, elegance, and excellence — empowering you to play at your best, in style.
         </p>
-        <a href="category.html" class="btn-primary">Shop Now</a>
+        <div class="hero-buttons">
+          <a href="category.html?cat=women" class="btn-secondary">
+            SHOP WOMEN’S APPAREL
+          </a>
+          <a href="category.html?cat=men" class="btn-secondary">
+            SHOP MEN’S APPAREL
+          </a>
+        </div>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
+  
+    <!-- Shop by Category dưới hero -->
+  <section class="shop-by-category container">
+    <h2>Shop by Category</h2>
+    <div class="categories">
+      <a href="category/racket.html" class="category-card">
+        <img src="design/rackets.jpg" alt="Rackets" />
+        <span>Rackets</span>
+      </a>
+      <a href="category/shoes.html" class="category-card">
+        <img src="design/shoes.jpg" alt="Shoes" />
+        <span>Shoes</span>
+      </a>
+      <a href="category/cloting.html" class="category-card">
+        <img src="design/accessories.jpg" alt="Accessories" />
+        <span>Bags</span>
+      </a>
+      <a href="category/cloting.html" class="category-card">
+        <img src="design/clothing.jpg" alt="Accessories" />
+        <span>Accessories</span>
+      </a>
+    </div>
+  </section>
 
+  <!-- Current Deals Banner -->
+  <section class="current-deals">
+    <div class="deals-content">
+      <div class="deals-discount">
+        <h2 class="discount-up">UP TO</h2>
+        <h2 class="discount-off">50% OFF</h2>
+      </div>
+      <div class="deals-info">
+        <h3 class="deals-title">Memorial Day Event</h3>
+        <p class="deals-desc">
+          Save up to 50% off spring’s most-loved and summer’s must-haves.
+        </p>
+        <a href="deals.html" class="btn-deals">SHOP DEALS</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-product">
+  <div class="featured-content">
+    <!-- Ảnh sản phẩm -->
+    <div class="featured-image">
+      <img src="images/wilson-intrigueSE.jpg" alt="Pro Staff 87" />
+    </div>
+    <!-- Thông tin & nút Shop Now -->
+    <div class="featured-info">
+      <h2 class="fp-title">Authenticity is Iconic</h2>
+      <p class="fp-desc">
+        Our new Wilson intrigue SE is dripping with authentic tennis style and built to serve endlessly easygoing comfort from the stands to the streets.
+      </p>
+      <!-- thay 87 bằng ID thực tế của sản phẩm -->
+      <a href="detail.html?id=1" class="btn-primary fp-btn">Shop Now</a>
+    </div>
+  </div>
+  </section>
+</div>
   <script type="module" src="home.js"></script>
 </body>
 </html>
