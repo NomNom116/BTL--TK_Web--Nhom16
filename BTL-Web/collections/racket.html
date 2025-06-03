@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Racket - FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app"></div>
+
+  <div id="temporaryContent">
+    
+    <div class="title">Tennis Racket</div>
+ <p style="text-align:center; color:#555; margin-bottom: 20px;">
+      Chọn lựa những mẫu vợt tennis chất lượng từ các thương hiệu hàng đầu phù hợp với trình độ và phong cách của bạn.
+    </p>
+    
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Search by name…" />
+      <select id="priceFilter">
+        <option value="all">All Prices</option>
+        <option value="under2000000"> under 2000000đ</option>
+        <option value="2000000to5000000">2000000đ–5000000đ</option>
+        <option value="above5000000">Above 5000000đ</option>
+      </select>
+    </div>
+
+    <div class="listProduct"></div>
+  </div>
+
+  <script type="module" src="category.js"></script>
+</body>
+</html>
