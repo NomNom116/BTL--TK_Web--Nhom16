@@ -1502,3 +1502,32 @@ body.activeTabCart .container {
 .support-form .btn-primary:hover {
   background-color: #1d1d1d;
 }
+/* Tổng thể trang */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Tiêu đề chính */
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Danh sách danh mục */
+#categories {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+/* Mỗi khối category */
+.category {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding
