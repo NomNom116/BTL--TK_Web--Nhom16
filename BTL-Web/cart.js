@@ -1,149 +1,149 @@
 // cart.js
 import products from './products.js';
-function cart() {
-  const listCart         = document.querySelector('.cart-items');       // container cho .cart-item
-  const iconCart         = document.querySelector('#cartBtn');          // icon giỏ hàng
-  const badge            = iconCart.querySelector('.cart-count');       // chấm/badge số lượng
-  const itemCountEl      = document.querySelector('.item-count');       // <span class="item-count">
-  const subtotalAmountEl = document.querySelector('.subtotal-amount');  // <span class="subtotal-amount">
+
+export default function cart() {
   const body             = document.body;
-  const closeBtn         = document.querySelector('.close-cart');       // nút ×
-  const checkBtn         = document.querySelector('.btn-checkout');     // nút Checkout
+  const listCart         = document.querySelector('.cart-items');
+  const iconCart         = document.getElementById('cartBtn');
+  const badge            = document.querySelector('.cart-count');
+  const itemCountEl      = document.querySelector('.item-count');
+  const subtotalAmountEl = document.querySelector('.subtotal-amount');
+  const closeBtn         = document.querySelector('.close-cart');
+  const checkoutBtn      = document.querySelector('.btn-checkout');
 
+  // Nếu thiếu bất kỳ phần tử quan trọng nào thì abort
+  if (!listCart || !iconCart || !badge || !itemCountEl || !subtotalAmountEl) return;
+
+  // Load cart từ localStorage hoặc tạo mới
   let cartArr = JSON.parse(localStorage.getItem('cart')) || [];
-  function updateCart(id, qty) {
-    const prodId = Number(id);
-    const idx = cartArr.findIndex(item => item.product_id === prodId);
 
-    if (qty <= 0) {
-      // xóa item đó khỏi cartArr
-      if (idx > -1) cartArr.splice(idx, 1);
-    } else if (idx < 0) {
-      // chưa có trong cartArr, push mới
-      cartArr.push({ product_id: prodId, quantity: qty });
-    } else {
-      // đã có, cập nhật quantity
-      cartArr[idx].quantity = qty;
-    }
-
-    // lưu lại localStorage và render lại
+  // Lưu cartArr & render lại
+  function saveAndRender() {
     localStorage.setItem('cart', JSON.stringify(cartArr));
-    render();
+    renderCart();
   }
 
-  /**
-   * Rút gọn text nếu quá dài (để không tràn layout)
-   * @param {string} text 
-   * @param {number} maxLength 
-   * @returns {string}
-   */
-  function truncateText(text, maxLength) {
-    return text.length > maxLength ? text.slice(0, maxLength - 1) + '…' : text;
+  // Format tiền
+  function fmt(price) {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(price);
   }
 
-  /**
-   * Vẽ nội dung giỏ hàng lên DOM
-   */
-  function render() {
-    // 3) Reset nội dung
+  // Vẽ lại giỏ hàng
+  function renderCart() {
     listCart.innerHTML = '';
-
     let totalQty = 0;
     let totalPrice = 0;
 
-    // Nếu giỏ trống, hiển thị message
     if (cartArr.length === 0) {
-      listCart.innerHTML = `
-        <div class="empty-cart">
-          <p>Your cart is empty.</p>
-        </div>
-      `;
+      listCart.innerHTML = '<p class="empty-cart">Giỏ hàng trống.</p>';
     } else {
-      // Với mỗi item trong cartArr
       cartArr.forEach(item => {
-        const prod = products.find(p => p.id === item.product_id);
+        const prod = products.find(p => String(p.id) === String(item.id));
         if (!prod) return;
 
         totalQty += item.quantity;
         totalPrice += prod.price * item.quantity;
 
-        // Tạo one .cart-item block
         const div = document.createElement('div');
         div.className = 'cart-item';
         div.dataset.id = prod.id;
-
-        // Inner HTML theo layout mới
         div.innerHTML = `
           <div class="item-image">
-            <img src="${prod.image}" alt="${prod.name}" />
+            <img src="${prod.image}" alt="${prod.name}">
           </div>
           <div class="item-details">
-            <h3 class="item-title">${truncateText(prod.name, 60)}</h3>
-            <p class="item-subtitle">${prod.subtitle || ''}</p>
-            <p class="item-price">${(prod.price * item.quantity).toFixed(2)}đ</p>
+            <h3 class="item-title">${prod.name}</h3>
+            <p class="item-price">${fmt(prod.price * item.quantity)}</p>
             <div class="item-qty">
-              <label>Quantity:</label>
-              <button class="qty-minus" data-id="${prod.id}">&minus;</button>
+              <button class="qty-minus" data-id="${prod.id}">−</button>
               <span class="qty-number">${item.quantity}</span>
-              <button class="qty-plus" data-id="${prod.id}">&plus;</button>
-              <button class="item-delete" data-id="${prod.id}" aria-label="Remove">&#128465;</button>
+              <button class="qty-plus"  data-id="${prod.id}">+</button>
+              <button class="item-delete" data-id="${prod.id}">🗑️</button>
             </div>
           </div>
         `;
-
         listCart.appendChild(div);
       });
     }
 
-    // 4) Cập nhật badge, item-count và subtotal-amount
-    badge.textContent = totalQty;
-    itemCountEl.textContent = totalQty;
-    subtotalAmountEl.textContent = `${totalPrice.toFixed(2)}đ`;
+    badge.textContent            = totalQty;
+    itemCountEl.textContent      = totalQty;
+    subtotalAmountEl.textContent = fmt(totalPrice);
   }
 
-  // 5) Các sự kiện mở/đóng cart, chuyển trang
-  iconCart.addEventListener('click', () => {
+  // Thay đổi quantity (nếu qty ≤0 thì xóa)
+  function updateItem(id, qty) {
+    id = String(id);
+    const idx = cartArr.findIndex(i => String(i.id) === id);
+    if (qty <= 0) {
+      if (idx > -1) cartArr.splice(idx, 1);
+    } else if (idx === -1) {
+      cartArr.push({ id, quantity: qty });
+    } else {
+      cartArr[idx].quantity = qty;
+    }
+    saveAndRender();
+  }
+
+  // --- Event listeners ---
+
+  // Toggle slide-out cart
+  iconCart.addEventListener('click', e => {
+    e.stopPropagation();
     body.classList.toggle('activeTabCart');
   });
   closeBtn.addEventListener('click', () => {
     body.classList.remove('activeTabCart');
   });
-  checkBtn.addEventListener('click', () => {
-    body.classList.remove('activeTabCart');
-    window.location.href = 'checkout.html';
+  document.addEventListener('click', e => {
+    if (
+      body.classList.contains('activeTabCart') &&
+      !document.querySelector('.cartTab').contains(e.target) &&
+      e.target !== iconCart
+    ) {
+      body.classList.remove('activeTabCart');
+    }
   });
 
-  // 6) Delegate click cho các nút tăng, giảm, xóa, và addCart
-  document.addEventListener('click', e => {
+  // Checkout
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      body.classList.remove('activeTabCart');
+      window.location.href = 'checkout.html';
+    });
+  }
+
+  // Delegate cho tăng/giảm/xóa trong cart
+  listCart.addEventListener('click', e => {
     const id = e.target.dataset.id;
     if (!id) return;
+    const idx = cartArr.findIndex(i => String(i.id) === id);
+    const curQty = idx > -1 ? cartArr[idx].quantity : 0;
 
-    // Tìm index hiện tại (nếu có) trong cartArr
-    const idx = cartArr.findIndex(i => i.product_id === Number(id));
-    const currentQty = idx > -1 ? cartArr[idx].quantity : 0;
-
-    // If click “Add to Cart” button trên trang product/category
-    if (e.target.classList.contains('addCart')) {
-      updateCart(id, currentQty + 1);
-      return; // ngăn chồng logic xuống dưới
-    }
-
-    // Giảm số lượng
-    if (e.target.classList.contains('qty-minus')) {
-      updateCart(id, currentQty - 1);
-    }
-    // Tăng số lượng
-    if (e.target.classList.contains('qty-plus')) {
-      updateCart(id, currentQty + 1);
-    }
-    // Xóa item
-    if (e.target.classList.contains('item-delete')) {
-      updateCart(id, 0);
+    if (e.target.matches('.qty-minus')) {
+      updateItem(id, curQty - 1);
+    } else if (e.target.matches('.qty-plus')) {
+      updateItem(id, curQty + 1);
+    } else if (e.target.matches('.item-delete')) {
+      updateItem(id, 0);
     }
   });
 
-  // 7) Lần đầu tiên gọi khi khởi cart
-  render();
-}
+  // Bắt tất cả nút “Add to Bag” có class .btn-addcart
+  document.querySelectorAll('.btn-addcart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const idx = cartArr.findIndex(i => String(i.id) === id);
+      const curQty = idx > -1 ? cartArr[idx].quantity : 0;
+      updateItem(id, curQty + 1);
+      // Mở cart panel ngay khi thêm
+      body.classList.add('activeTabCart');
+    });
+  });
 
-export default cart;
+  // Lần đầu render
+  renderCart();
+}

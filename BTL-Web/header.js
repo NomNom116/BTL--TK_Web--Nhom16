@@ -1,26 +1,52 @@
 // header.js
-// Export function to initialize header, search, user menu, and cart toggle
 export function initHeader() {
-  // Mobile menu toggle
-  const menuToggle = document.getElementById('menuToggle');
-  if (!menuToggle) return;
-  menuToggle.addEventListener('click', () => {
-    document.body.classList.toggle('menu-open');
-  });
-
-  // Toggle search bar
+  const body = document.body;
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mainNav = document.querySelector('.main-nav');
   const searchBtn = document.getElementById('searchBtn');
   const searchContainer = document.getElementById('searchContainer');
-  const searchForm = document.getElementById('searchForm');
   const searchField = document.getElementById('searchField');
-  if (searchBtn && searchContainer && searchForm && searchField) {
+  const searchForm = document.getElementById('searchForm');
+  const userBtn = document.getElementById('userBtn');
+  const cartBtn = document.getElementById('cartBtn');
+  const cartTab = document.querySelector('.cartTab');
+
+  // Khởi tạo trạng thái ban đầu
+  body.classList.remove('activeTabMenu', 'activeTabCart');
+  if (searchContainer) searchContainer.classList.remove('active');
+
+  // 1) Menu hamburger (off-canvas)
+  if (burgerBtn && mainNav) {
+    burgerBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      body.classList.toggle('activeTabMenu');
+    });
+    document.addEventListener('click', e => {
+      if (
+        body.classList.contains('activeTabMenu') &&
+        !mainNav.contains(e.target) &&
+        e.target !== burgerBtn
+      ) {
+        body.classList.remove('activeTabMenu');
+      }
+    });
+  }
+
+  // 2) Search popup
+  if (searchBtn && searchContainer && searchField && searchForm) {
     searchBtn.addEventListener('click', e => {
       e.stopPropagation();
       searchContainer.classList.toggle('active');
-      if (searchContainer.classList.contains('active')) searchField.focus();
+      if (searchContainer.classList.contains('active')) {
+        searchField.focus();
+      }
     });
     document.addEventListener('click', e => {
-      if (!searchContainer.contains(e.target) && e.target !== searchBtn) {
+      if (
+        searchContainer.classList.contains('active') &&
+        !searchContainer.contains(e.target) &&
+        e.target !== searchBtn
+      ) {
         searchContainer.classList.remove('active');
       }
     });
@@ -31,36 +57,27 @@ export function initHeader() {
     });
   }
 
-  // User dropdown menu
-  const userBtn = document.getElementById('userBtn');
-  const userMenu = document.getElementById('userMenu');
-  if (userBtn && userMenu) {
-    userBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      userMenu.innerHTML = '';
+  // 3) User redirect
+  if (userBtn) {
+    userBtn.addEventListener('click', () => {
       const user = JSON.parse(localStorage.getItem('loggedInUser'));
-      if (user) {
-        const profileBtn = document.createElement('button');
-        profileBtn.textContent = 'Profile';
-        profileBtn.addEventListener('click', () => window.location.href = 'profile.html');
-        const logoutBtn = document.createElement('button');
-        logoutBtn.textContent = 'Logout';
-        logoutBtn.addEventListener('click', () => {
-          localStorage.removeItem('loggedInUser');
-          window.location.href = 'index.html';
-        });
-        userMenu.append(profileBtn, logoutBtn);
-      } else {
-        const loginBtn = document.createElement('button');
-        loginBtn.textContent = 'Login';
-        loginBtn.addEventListener('click', () => window.location.href = 'login.html');
-        userMenu.append(loginBtn);
-      }
-      userMenu.classList.toggle('active');
+      window.location.href = user ? 'profile.html' : 'login.html';
+    });
+  }
+
+  // 4) Slide-out cart
+  if (cartBtn && cartTab) {
+    cartBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      body.classList.toggle('activeTabCart');
     });
     document.addEventListener('click', e => {
-      if (!userMenu.contains(e.target) && e.target !== userBtn) {
-        userMenu.classList.remove('active');
+      if (
+        body.classList.contains('activeTabCart') &&
+        !cartTab.contains(e.target) &&
+        e.target !== cartBtn
+      ) {
+        body.classList.remove('activeTabCart');
       }
     });
   }

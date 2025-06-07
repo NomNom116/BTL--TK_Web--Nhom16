@@ -5,45 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>FitFriend</title>
     <link rel="stylesheet" href="style.css" />
-    <style>
-    @media only screen and (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-        nav.main-nav {
-        display: none;
-        flex-direction: column;
-        background-color: #fff;
-        position: absolute;
-        top: 70px;
-        right: 10px;
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 999;
-        }
-
-        nav.main-nav a {
-            margin: 10px 0;
-        }
-
-        body.menu-open nav.main-nav {
-            display: flex;
-        }
-    }
-    </style>
-      <!-- 1) Thêm Google Font Montserrat -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
   <header class="site-header">
+  <!--Menu Toggle-->
+  <button id="burgerBtn" class="hamburger" aria-label="Toggle Menu">
+    <img src="design/menu_toggle.png" alt="Menu" class="menu_toggle">
+  </button>
+  
+  <!--Logo-->
   <a href="home.html" class="site-brand">
     <img src="design/logo.png" alt="FitFriend" class="site-logo" />
     <span class="site-title">FitFriend</span>
   </a>
-  <button id="menuToggle" class="menu-toggle" aria-label="Menu">☰</button>
 
   <!-- Menu điều hướng -->
   <nav id="mainNav" class="main-nav">
@@ -53,9 +30,9 @@
         <a href="#" class="nav-link">Category</a>
         <div class="dropdown">
           <div class="dropdown-list">
-            <a href="category.html?cat=rackets">Rackets</a>
-            <a href="category.html?cat=bags">Bags</a>
-            <a href="category.html?cat=accessories">Accessories</a>
+            <a href="racket.html">Rackets</a>
+            <a href="bags.html">Bags</a>
+            <a href="accessories.html">Accessories</a>
           </div>
           <div class="dropdown-image">
             <img src="design/category.jpg" alt="Category" />
@@ -116,10 +93,6 @@
     <button id="userBtn" aria-label="User">
       <img src="icons/user-icon.png" alt="Người dùng" class="icon-btn" />
     </button>
-    <div id="userMenu" class="user-menu">
-      <p id="userWelcome">Hello, Guest</p>
-      <button id="logoutBtn" style="display:none">Logout</button>
-    </div>
     <button id="cartBtn" class="icon-cart" aria-label="Cart">
       <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
       <span class="cart-count"></span>
@@ -195,33 +168,6 @@
       <p>© 2025 FitFriend. All rights reserved.</p>
     </div>
   </footer>
-
-  <!-- script inline bảo vệ trang & logout nếu cần -->
-  <script>
-    const user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (user) {
-      document.getElementById('userWelcome')?.innerText = `Hello, ${user.name}`;
-      document.getElementById('logoutBtn')?.style.display = 'inline-block';
-    }
-
-    document.getElementById('logoutBtn')?.addEventListener('click', () => {
-      localStorage.removeItem('loggedInUser');
-      alert('logged out');
-      location.href = 'index.html';
-    });
-
-    // Bảo vệ trang riêng tư
-    const protectedPages = ['checkout.html'];
-    const currentPage = location.pathname.split('/').pop();
-    if (protectedPages.includes(currentPage) && !localStorage.getItem('loggedInUser')) {
-      alert('Please log in to access this page.');
-      location.href = 'login.html';
-    }
-
-    // Menu toggle (mobile)
-    document.getElementById('menuToggle')?.addEventListener('click', () => {
-      document.body.classList.toggle('menu-open');
-    });
-  </script>
+  <script src="header.js"></script>
 </body>
 </html>

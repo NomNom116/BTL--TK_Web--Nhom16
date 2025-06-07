@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deals – FitFriend</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Chỗ chèn template chung (header/nav/footer) -->
+  <div id="app"></div>
+
+  <!-- Nội dung riêng của trang Deals -->
+  <div id="temporaryContent">
+    <h1 class="page-title">Hot deals</h1>
+    <p style="text-align:center; color:#555; margin-bottom:20px;">
+      Exclusive Offers Happening Now! Act Fast and Save Big!
+    </p>
+    <section class="current-deals">
+    <div class="deals-content">
+      <div class="deals-discount">
+        <h2 class="discount-up">UP TO</h2>
+        <h2 class="discount-off">50% OFF</h2>
+      </div>
+      <div class="deals-info">
+        <h3 class="deals-title">Memorial Day Event</h3>
+        <p class="deals-desc">
+          Save up to 50% off spring’s most-loved and summer’s must-haves.
+        </p>
+      </div>
+    </div>
+    </section>
+    <div class="deals-list"></div>
+  </div>
+
+  <script type="module" src="deals.js"></script>
+</body>
+</html>
