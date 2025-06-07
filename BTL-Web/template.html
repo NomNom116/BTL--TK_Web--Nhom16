@@ -15,15 +15,15 @@
   <button id="burgerBtn" class="hamburger" aria-label="Toggle Menu">
     <img src="design/menu_toggle.png" alt="Menu" class="menu_toggle">
   </button>
-  
+
   <!--Logo-->
   <a href="home.html" class="site-brand">
     <img src="design/logo.png" alt="FitFriend" class="site-logo" />
     <span class="site-title">FitFriend</span>
   </a>
 
-  <!-- Menu điều hướng -->
   <nav id="mainNav" class="main-nav">
+    <!-- Menu Desktop -->
     <ul class="nav-list">
       <!-- Category -->
       <li class="nav-item has-dropdown">
@@ -45,8 +45,9 @@
         <a href="#" class="nav-link">Men</a>
         <div class="dropdown">
           <div class="dropdown-list">
-            <a href="category.html?cat=men-tops">Men’s Tops</a>
-            <a href="category.html?cat=men-bottoms">Men’s Bottoms</a>
+            <a href="men-tops.html">Men’s Tops</a>
+            <a href="men-bottoms.html">Men’s Bottoms</a>
+            <a href="men.html">Fresh Pick</a>
           </div>
           <div class="dropdown-image">
             <img src="design/men-outfit.jpg" alt="Men’s" />
@@ -59,8 +60,9 @@
         <a href="#" class="nav-link">Women</a>
         <div class="dropdown">
           <div class="dropdown-list">
-            <a href="category.html?cat=women-tops">Women’s Tops</a>
-            <a href="category.html?cat=women-bottoms">Women’s Bottoms</a>
+            <a href="women-tops.html">Women’s Tops</a>
+            <a href="women-bottoms.html ">Women’s Bottoms</a>
+            <a href="women.html">Fresh Pick</a>
           </div>
           <div class="dropdown-image">
             <img src="design/women-outfit.jpg" alt="Women’s" />
@@ -78,6 +80,44 @@
         <a href="deals.html" class="nav-link">Deals</a>
       </li>
     </ul>
+
+    <!-- mobile panels-->
+  <div class="nav-panels">
+    <div class="panel panel-main">
+      <ul class="nav-list">
+        <li class="nav-item has-panel" data-target="men">MEN</li>
+        <li class="nav-item has-panel" data-target="women">WOMEN</li>
+        <li class="nav-item"><a href="shoes.html">SHOES</a></li>
+        <li class="nav-item"><a href="deals.html">DEALS</a></li>
+      </ul>
+    </div>
+    <div class="panel panel-men">
+      <header class="panel-header">
+        <button class="btn-back">←</button>
+        <span>MEN</span>
+      </header>
+      <ul class="nav-list">
+        <li><a href="men-tops.html">Tops</a></li>
+        <li><a href="men-bottoms.html">Bottoms</a></li>
+        <li><a href="shoes.html">Shoes</a></li>
+        <li><a href="bags.html">Bags</a></li>
+      </ul>
+      <a href="men.html" class="btn-see-all">See More</a>
+    </div>
+    <div class="panel panel-women">
+      <header class="panel-header">
+        <button class="btn-back">←</button>
+        <span>WOMEN</span>
+      </header>
+      <ul class="nav-list">
+        <li><a href="women-tops.html">Tops</a></li>
+        <li><a href="women-bottoms.html">Bottoms</a></li>
+        <li><a href="shoes.html">Shoes</a></li>
+        <li><a href="bags.html">Bags</a></li>
+      </ul>
+      <a href="women.html" class="btn-see-all">See More</a>
+    </div>
+  </div>
   </nav>
 
   <div id="searchContainer" class="search-container">
@@ -95,7 +135,6 @@
     </button>
     <button id="cartBtn" class="icon-cart" aria-label="Cart">
       <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
-      <span class="cart-count"></span>
     </button>
   </div>
   </header>
@@ -107,7 +146,6 @@
   <div class="cartTab">
     <header class="cart-header">
       <h2>Shopping Bag</h2>
-      <button class="close-cart" aria-label="Close">&times;</button>
     </header>
 
     <div class="cart-items"></div>

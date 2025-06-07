@@ -1,58 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - FitFriend</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .login-container {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 30px;
-      background-color: #f9f9f9;
-      border-radius: 12px;
-      box-shadow: 0 0 10px #ddd;
-    }
-    .login-container h1 {
-      margin-bottom: 20px;
-    }
-    .login-container form {
-      display: flex;
-      flex-direction: column;
-    }
-    .login-container input {
-      margin-bottom: 15px;
-      padding: 10px;
-      font-size: 16px;
-    }
-    .login-container button {
-      padding: 10px;
-      background-color: #2F2F2F;
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      border-radius: 5px;
-    }
-    .login-container p {
-      margin-top: 15px;
-      text-align: center;
-    }
-  </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login / Register – FitFriend</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <div class="login-container">
-    <h1>Login</h1>
-    <form id="loginForm">
-      <input type="email" placeholder="Email" id="loginEmail" required />
-      <input type="password" placeholder="Password" id="loginPassword" required />
-      <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="register.html">Register here</a></p>
-    <p><a href="forgot.html">Forgot password?</a></p>
+  <div class="auth-container">
+  <!-- Tab headers -->
+  <div class="tab-header">
+    <div id="tab-login" class="active">LOGIN</div>
+    <div id="tab-register">CREATE AN ACCOUNT</div>
   </div>
 
-  <script type="module" src="auth.js"></script>
+  <!-- Tab contents -->
+  <div class="tab-content">
+    <!-- LOGIN -->
+    <div id="pane-login" class="tab-pane active">
+      <div class="form-group">
+        <input type="email" placeholder="Email" id="loginEmail"/>
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" id="loginPassword"/>
+      </div>
+      <button onclick="location.href='profile.html'">Login</button>
+    </div>
+
+    <!-- REGISTER -->
+    <div id="pane-register" class="tab-pane">
+      <div class="form-group">
+        <input type="text" placeholder="Full Name" id="fullname"/>
+      </div>
+      <div class="form-group">
+        <input type="email" placeholder="Email" id="regEmail"/>
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Password" id="regPassword"/>
+      </div>
+      <div class="form-group">
+        <input type="password" placeholder="Confirm Password" id="regConfirm"/>
+      </div>
+      <button onclick="location.href='login.html'">Register</button>
+    </div>
+  </div>
+  </div>
+  <script>
+    // Toggle tabs
+    const tLogin = document.getElementById('tab-login');
+    const tReg   = document.getElementById('tab-register');
+    const pLogin = document.getElementById('pane-login');
+    const pReg   = document.getElementById('pane-register');
+
+    tLogin.addEventListener('click', () => {
+      tLogin.classList.add('active');
+      tReg.classList.remove('active');
+      pLogin.classList.add('active');
+      pReg.classList.remove('active');
+    });
+    tReg.addEventListener('click', () => {
+      tReg.classList.add('active');
+      tLogin.classList.remove('active');
+      pReg.classList.add('active');
+      pLogin.classList.remove('active');
+    });
+  </script>
 </body>
 </html>
