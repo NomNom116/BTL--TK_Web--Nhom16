@@ -2284,3 +2284,77 @@ body.activeTabCart .container {
     grid-template-columns: 1fr;
   }
 }
+/*Product*/
+#hot-products {
+  text-align-last: center;
+}
+
+#hot-products .hot-product-list {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+#hot-products .pro {
+  width: 23%;
+  min-width: 250px;
+  padding: 10px 12px;
+  border-radius: 25px;
+  margin: 15px 0;
+  transition: 0.2s ease;
+  position: relative;
+}
+
+#hot-products {
+  text-align: center;
+  padding: 40px 0;
+}
+
+#hot-products .hot-product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+#hot-products .pro {
+  width: 220px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+#hot-products .pro:hover {
+  transform: translateY(-8px);
+}
+
+#hot-products .pro img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+#hot-products .pro .des {
+  text-align: start;
+  padding: 10px 0;
+}
+
+#hot-products .pro .des span {
+  color: #606063;
+  font-size: 14px;
+}
+
+#hot-products .pro .des h5 {
+  padding-top: 5px;
+  color: #1a1a1a;
+  font-size: 16px;
+}
+
+#hot-products .pro .des h4 {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 5px;
+}
