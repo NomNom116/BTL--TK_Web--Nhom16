@@ -120,23 +120,24 @@
   </div>
   </nav>
 
-  <div id="searchContainer" class="search-container">
-    <form id="searchForm">
-      <input type="text" id="searchField" placeholder="I'm looking for…" />
-    </form>
-  </div>
-
   <div class="header-icons">
     <button id="searchBtn" aria-label="Search">
       <img src="icons/magnifer-icon.png" alt="Tìm kiếm" class="icon-btn" />
     </button>
-    <button id="userBtn" aria-label="User">
+    <button id="userBtn" aria-label="User" onclick="location.href='profile.html'">
       <img src="icons/user-icon.png" alt="Người dùng" class="icon-btn" />
     </button>
     <button id="cartBtn" class="icon-cart" aria-label="Cart">
       <img src="icons/shopping-bag.png" alt="Giỏ hàng" class="icon-btn" />
     </button>
   </div>
+
+  <div id="searchContainer" class="search-container">
+    <form id="searchForm">
+      <input type="text" id="searchField" placeholder="I'm looking for…" />
+    </form>
+  </div>
+
   </header>
 
   <div id="contentTab"></div>
@@ -206,6 +207,6 @@
       <p>© 2025 FitFriend. All rights reserved.</p>
     </div>
   </footer>
-  <script src="header.js"></script>
+  <script type="module" src="header.js"></script>
 </body>
 </html>

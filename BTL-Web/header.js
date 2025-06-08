@@ -1,4 +1,6 @@
 // header.js
+import products from './products.js';
+
 export function initHeader() {
   const body = document.body;
   const burgerBtn = document.getElementById('burgerBtn');
@@ -52,18 +54,17 @@ export function initHeader() {
     });
     searchForm.addEventListener('submit', e => {
       e.preventDefault();
-      const q = searchField.value.trim();
-      if (q) window.location.href = `category.html?q=${encodeURIComponent(q)}`;
+      const q = searchField.value.trim().toLowerCase();
+      const prod = products.find(p => p.name.toLowerCase().includes(q));
+      if (prod) {
+        window.location.href = `detail.html?id=${prod.id}`;
+      } else {
+        alert(`Không tìm thấy: "${searchField.value}"`);
+      }
+      searchContainer.classList.remove('active');
     });
   }
 
-  // 3) User redirect
-  if (userBtn) {
-    userBtn.addEventListener('click', () => {
-      const user = JSON.parse(localStorage.getItem('loggedInUser'));
-      window.location.href = user ? 'profile.html' : 'login.html';
-    });
-  }
 
   // 4) Slide-out cart
   if (cartBtn && cartTab) {
