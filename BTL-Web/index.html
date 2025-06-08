@@ -27,7 +27,7 @@
       <p class="auth-footer">
         <a href="forgot.html">Forgot password?</a>
       </p>
-      <button class="btn-action" onclick="location.href='profile.html'">Login</button>
+      <button class="btn-action" onclick="loginUser()">Login</button>
     </div>
 
     <!-- REGISTER -->
@@ -44,7 +44,7 @@
       <div class="form-group">
         <input type="password" placeholder="Confirm Password" id="regConfirm"/>
       </div>
-      <button class="btn-action" onclick="location.href='login.html'">Register</button>
+      <button class="btn-action" onclick="registerUser()">Register</button>
     </div>
   </div>
   </div>
@@ -68,5 +68,6 @@
       pLogin.classList.remove('active');
     });
   </script>
+  <script src="auth.js"></script>
 </body>
 </html>

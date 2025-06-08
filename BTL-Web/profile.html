@@ -44,6 +44,7 @@
           </div>
           <button type="submit" class="btn-save">Lưu thay đổi</button>
         </form>
+        <button onclick="logout()" class="btn-save" style="margin-top: 1rem;">Đăng xuất</button>
         <section class="order-history">
           <h2>Lịch sử mua hàng</h2>
           <ul id="orderHistoryList" class="order-history-list"></ul>
@@ -62,10 +63,10 @@
         document.getElementById('temporaryContent').innerHTML = '';
         initHeader();
 
-        const user = JSON.parse(localStorage.getItem('loggedInUser'));
+        const user = JSON.parse(localStorage.getItem('currentUser'));
         if (!user) {
           alert('Vui lòng đăng nhập để truy cập trang này.');
-          window.location.href = 'login.html';
+          window.location.href = 'index.html';
           return;
         }
         user.orders = user.orders || [];
@@ -116,11 +117,16 @@
           user.phone   = document.getElementById('phone').value.trim();
           user.address = document.getElementById('address').value.trim();
           user.avatar  = avatarImg.src;
-          localStorage.setItem('loggedInUser', JSON.stringify(user));
+          localStorage.setItem('currentUser', JSON.stringify(user));
           alert('Cập nhật thông tin thành công!');
         });
       })
       .catch(err => console.error('Error loading template:', err));
+
+      function logout() {
+      localStorage.removeItem('currentUser');
+      window.location.href = 'login.html';
+      }
   </script>
 </body>
 </html>
