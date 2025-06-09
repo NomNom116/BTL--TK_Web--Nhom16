@@ -175,12 +175,19 @@ svg {
   background: none;
   border: none;
   width: 45px;
+  max-width: 45px;
   height: 45px;
+  max-height: 45px;
   padding: 4px;
   cursor: pointer;
   outline: none;
   flex-direction: column;
   gap: 4px;
+}
+.site-header .hamburger img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 .site-header .close-menu-btn {
   display: none;
@@ -1904,7 +1911,7 @@ body {
 @media (max-width: 768px) {
   /* HEADER & NAVIGATION */
   .site-header .hamburger {
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     gap: 4px;
     background: none;
